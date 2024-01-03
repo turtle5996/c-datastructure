@@ -50,7 +50,7 @@ void insertLinkList(listNode** first, listNode* current, int x) {
 int deleteLinkList(listNode** first, listNode* current) {
 	listNode* temp;
 	int imsi;
-
+	temp = (listNode*)malloc(sizeof(listNode));
 	if (current == NULL) {
 		temp = *first;
 		*first = temp->link;
@@ -130,6 +130,7 @@ void adddoublelistNode(node* dlist) {
 //이중연결리스트의 삭제
 void deletDoubleListNode(node* dlist) {
 	doubleNode* pre, * next, * current;
+	current = (node*)malloc(sizeof(node));
 
 	//맨앞에 삭제
 	if (current == dlist) {
