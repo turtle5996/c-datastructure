@@ -150,3 +150,39 @@ void deletDoubleListNode(node* dlist) {
 
 }
 
+void transposetMatrix() { //희소행렬의 전치행렬 구하기
+	int a[5][3], t[5][3], row, column, count, k, i, j;//a[][]는 희소행렬, t[][]는 만들 전치 행렬 count는 원소개수
+
+	row = a[0][0];
+	column = a[0][1];
+	count = a[0][2];
+
+	t[0][0] = a[0][1]; //행 열 크기 변경
+	t[0][1] = a[0][0];
+	t[0][2] = a[0][2];
+
+	k = 1;
+	for(i=0;i<column;i++)
+		for (j = 1; j < count; j++)
+			if (a[j][1] == i) {
+				t[k][0] = a[j][1]; t[k][1] = a[j][0]; t[k][2] = a[j][2]; //행,열 위치 변경
+				k++;
+			}
+}
+
+void polynominal() {
+
+	int f[9], g[7], a[9], degree, ai, fi, gi;
+
+	/* f[9]>g[7]인 경우*/
+
+	degree = f[0]; a[0] = degree; ai = fi = gi = 1;
+	for (degree = f[0]; degree >= 0; degree--) {
+		if (degree > g[0]) { // g[]보다 큰 차수일때
+			a[ai] = f[fi]; ai++; fi++;
+		}
+		else { // f[]와 g[]가 같은 차수 일때
+			a[ai] = f[fi] + g[gi]; ai++; fi++; gi++;
+		}
+	}
+}
