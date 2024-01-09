@@ -150,7 +150,8 @@ void deletDoubleListNode(node* dlist) {
 
 }
 
-void transposetMatrix() { //희소행렬의 전치행렬 구하기
+//희소행렬의 전치행렬 구하기
+void transposetMatrix() { 
 	int a[5][3], t[5][3], row, column, count, k, i, j;//a[][]는 희소행렬, t[][]는 만들 전치 행렬 count는 원소개수
 
 	row = a[0][0];
@@ -170,6 +171,7 @@ void transposetMatrix() { //희소행렬의 전치행렬 구하기
 			}
 }
 
+//계수 순차표현 다항식이 덧셈
 void polynominal() {
 
 	int f[9], g[7], a[9], degree, ai, fi, gi;
@@ -185,4 +187,63 @@ void polynominal() {
 			a[ai] = f[fi] + g[gi]; ai++; fi++; gi++;
 		}
 	}
+}
+
+
+//여기부터 스택
+#define N 100 // 스택의 최대크기
+
+/* 정수형 스택을 위한 변수정의*/
+void stack() { 
+	int s[N];
+	int top;
+	/*공집합인 스택 s 생성*/
+	top = -1;
+
+	
+}
+
+//스택의 추가함수
+int insertStack(int s[], int n, int* top, int x) {
+	if (*top < n - 1) { // 스택이 포화상태가 아니면
+		*top = *top + 1; // 추가원소를 위한 배열 메모리를 확보함
+		s[*top] = x;  //확보된 배열 메모리에 추가원소를 저장
+		return(1); //추가성공
+	}
+	return(0); // 추가실패
+}
+
+//스택의 삭제함수
+int deleteStack(int s[], int n, int *top){
+	int temp;
+	if (*top != -1) { //스택이 공집합이 아님
+		temp = s[*top]; //현재 탑원소를 임시변수에 저장함
+		*top = *top - 1; //현재 top원소를 삭제
+		return(temp); // 삭제 원소 반환
+	}
+	return(0); //삭제 실패
+}
+
+//스택의 순차리스트 추가
+int insertLinkedstack(struct linkNode** top, int x) {
+	struct linkNode* temp;
+	temp = (struct linkNode*)malloc(sizeof(struct  linkNode));
+	if (temp == NULL) return (0); //노드생성 안됬을시
+	temp->data = x; //노드데이터 x 추가
+	temp->link = *top;//노드 연결
+	*top = temp; // 이제는 temp가 top임
+	return(1);
+}
+
+//스택의 순차리스트 삭제
+int deleteLinkedstack(struct linkNode** top, int x) {
+	struct linkNode* temp;
+	int imsi;
+	temp = (struct linkNode*)malloc(sizeof(struct linkNode));
+	if (*top == NULL) return(-1); //top이 비어있을시 반환
+	temp = *top; //temp에 top 정보 입력
+	*top = (*top)->link; //top은 top 다음노드로 변경
+	imsi = temp->data; 
+	free(temp);
+	return(imsi);
 }
